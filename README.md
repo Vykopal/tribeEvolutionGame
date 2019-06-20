@@ -1,1 +1,1 @@
-# tribeEvolutionGame
+# Tribe evolution - Survival game
