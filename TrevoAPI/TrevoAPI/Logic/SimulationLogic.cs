@@ -10,7 +10,7 @@ namespace TrevoAPI.Logic
 {
     public class SimulationLogic : ISimulationLogic
     {
-        public IList<MapObject> MapObjects { get; set; }
+        public IList<Unit> MapObjects { get; set; }
         public uint Size { get; set; }
 
         public SimulationResult Simulate(SimulationInput simulationInput)
