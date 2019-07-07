@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TrevoAPI.Models
+namespace TrevoAPI.Logic.Strategy
 {
-    public enum MovementStrategy
+    public class RandomStrategy : Strategy
     {
-        NONE,
-        RANDOM
     }
 }

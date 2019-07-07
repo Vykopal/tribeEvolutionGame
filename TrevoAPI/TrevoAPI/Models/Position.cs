@@ -15,9 +15,9 @@ namespace TrevoAPI.Models
         public uint X
         {
             get { return x; }
-            set { if (value + x > maxX) { x = maxX; } else { x = value; } }
         }
-        public uint Y {
+        public uint Y
+        {
             get { return y; }
             set { if (value + y > maxY) { y = maxY; } else { y = value; } }
         }
@@ -36,6 +36,50 @@ namespace TrevoAPI.Models
         public bool IsMaxY()
         {
             return maxY == y;
+        }
+
+        public bool UpIfPossible()
+        {
+            var increasedY = y + 1;
+            if (increasedY > maxY)
+            {
+                y = increasedY;
+                return true;
+            }
+            return false;
+        }
+
+        public bool DownIfPossible()
+        {
+            var decreasedY = y - 1;
+            if (decreasedY >= 0)
+            {
+                y = decreasedY;
+                return true;
+            }
+            return false;
+        }
+
+        public bool RightIfPossible()
+        {
+            var decreasedX = x + 1;
+            if (decreasedX < maxX)
+            {
+                y = decreasedX;
+                return true;
+            }
+            return false;
+        }
+
+        public bool LeftIfPossible()
+        {
+            var decreasedX = x - 1;
+            if (decreasedX >= 0)
+            {
+                x = decreasedX;
+                return true;
+            }
+            return false;
         }
     }
 }
