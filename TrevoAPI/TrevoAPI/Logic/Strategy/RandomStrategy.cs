@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TrevoAPI.Models;
 
-namespace TrevoAPI.Logic.IStrategy
+namespace TrevoAPI.Logic.Strategy
 {
     public class RandomStrategy : IStrategy
     {

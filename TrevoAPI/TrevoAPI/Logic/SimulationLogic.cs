@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TrevoAPI.Logic.IStrategy;
+using TrevoAPI.Logic.Strategy;
 using TrevoAPI.Models;
 using TrevoAPI.Models.Input;
 using TrevoAPI.Models.Results;
@@ -26,13 +26,22 @@ namespace TrevoAPI.Logic
 
         private void Start(List<Unit> units)
         {
-            foreach (var unit in units)
+            var unitsOrdered = units.OrderBy(u => u.Initiative);
+            uint iteration = 0;
+            while (unitsOrdered.Any(u => u.Energy > 0))
             {
-
-                if (unit.Strategy is RandomStrategy)
+                foreach (var unit in unitsOrdered)
                 {
-                    
+                    for (int i = 0; i < unit.Speed; i++)
+                    {
+                        if (unit.Energy > 0 && unit.Strategy.TryMove(unit.Position))
+                        {
+                            unit.Energy--;
+                        }
+                    }
+                    unit.PositionsLog.Add(new PositionLog(iteration, unit.Position.X, unit.Position.Y));
                 }
+                iteration++;
             }
         }
 

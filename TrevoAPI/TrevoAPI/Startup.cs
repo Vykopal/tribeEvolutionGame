@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TrevoAPI.Logic;
+using TrevoAPI.Logic.Strategy;
 using TrevoAPI.Mappers;
 
 namespace TrevoAPI
@@ -28,7 +29,8 @@ namespace TrevoAPI
             services.AddMvc();
 
             services.AddScoped(typeof(ISimulationLogic), typeof(SimulationLogic));
-            services.AddScoped(typeof(IUnitMapper), typeof(UnitMapper));
+            services.AddSingleton(typeof(UnitMapper));
+            services.AddSingleton(typeof(StrategySelector));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

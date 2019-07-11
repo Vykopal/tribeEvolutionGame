@@ -14,21 +14,21 @@ namespace TrevoAPI.Controllers
     public class SimulationController : Controller
     {
         private readonly ISimulationLogic _simulationLogic;
-        private readonly IUnitMapper _unitMapper;
+        private readonly UnitMapper _unitMapper;
 
-        public SimulationController(ISimulationLogic simulationLogic, IUnitMapper unitMapper)
+        public SimulationController(ISimulationLogic simulationLogic, UnitMapper unitMapper)
         {
             _simulationLogic = simulationLogic;
             _unitMapper = unitMapper;
         }
-        // POST api/values
+        
         [HttpPost]
         public void Post([FromBody]SimulationInput input)
         {
             input.PlayerId = 0;
             input.Units = new List<UnitInput>();
-            input.Units.Add(new UnitInput() { Id = 0, Damage = 2, Energy = 4, Health = 4, Speed = 2, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
-            input.Units.Add(new UnitInput() { Id = 1, Damage = 2, Energy = 5, Health = 5, Speed = 1, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
+            input.Units.Add(new UnitInput() { Id = 0, Damage = 2, Energy = 10, Health = 4, Speed = 2, Initiative = 2, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
+            input.Units.Add(new UnitInput() { Id = 1, Damage = 2, Energy = 8, Health = 5, Speed = 1, Initiative = 1, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
 
             var units = new List<Unit>();
             input.Units.ForEach(u => units.Add(_unitMapper.MapToUnit(u)));

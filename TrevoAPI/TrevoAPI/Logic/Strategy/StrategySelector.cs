@@ -1,7 +1,7 @@
 ﻿using System;
 using TrevoAPI.Models;
 
-namespace TrevoAPI.Logic.IStrategy
+namespace TrevoAPI.Logic.Strategy
 {
     public class StrategySelector
     {
