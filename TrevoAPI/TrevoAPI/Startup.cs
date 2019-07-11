@@ -29,7 +29,10 @@ namespace TrevoAPI
             services.AddMvc();
 
             services.AddScoped(typeof(ISimulationLogic), typeof(SimulationLogic));
+
             services.AddSingleton(typeof(UnitMapper));
+            services.AddSingleton(typeof(SimulationResultMapper));
+
             services.AddSingleton(typeof(StrategySelector));
         }
 

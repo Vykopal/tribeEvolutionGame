@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrevoAPI.Logic.Strategy;
+using TrevoAPI.Mappers;
 using TrevoAPI.Models;
 using TrevoAPI.Models.Input;
 using TrevoAPI.Models.Results;
@@ -11,17 +12,23 @@ namespace TrevoAPI.Logic
 {
     public class SimulationLogic : ISimulationLogic
     {
+        private SimulationResultMapper _simulationResultMapper;
         private const uint MaxX = 100;
         private const uint MaxY = 100;
         private const int initialX = 50;
         private const int initialY = 50;
+
+        public SimulationLogic(SimulationResultMapper simulationResultMapper)
+        {
+            _simulationResultMapper = simulationResultMapper;
+        }
 
         public SimulationResult Simulate(uint playerId, List<Unit> units)
         {
             Setup(units);
 
             Start(units);
-            return new SimulationResult();
+            return _simulationResultMapper.MapToSimulationResult(units);
         }
 
         private void Start(List<Unit> units)

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace TrevoAPI.Models.Results
 {
-    public class SimulationResult
+    public class UnitMovement
     {
-        public List<UnitMovement> unitMovements { get; set; } = new List<UnitMovement>();
+        public uint Id { get; set; }
+        public List<PositionLog> PositionLogs { get; set; }
     }
 }

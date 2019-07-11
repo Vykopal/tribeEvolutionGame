@@ -7,6 +7,7 @@ using TrevoAPI.Logic;
 using TrevoAPI.Mappers;
 using TrevoAPI.Models;
 using TrevoAPI.Models.Input;
+using TrevoAPI.Models.Results;
 
 namespace TrevoAPI.Controllers
 {
@@ -23,16 +24,16 @@ namespace TrevoAPI.Controllers
         }
         
         [HttpPost]
-        public void Post([FromBody]SimulationInput input)
+        public SimulationResult Post([FromBody]SimulationInput input)
         {
             input.PlayerId = 0;
             input.Units = new List<UnitInput>();
             input.Units.Add(new UnitInput() { Id = 0, Damage = 2, Energy = 10, Health = 4, Speed = 2, Initiative = 2, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
-            input.Units.Add(new UnitInput() { Id = 1, Damage = 2, Energy = 8, Health = 5, Speed = 1, Initiative = 1, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
+            input.Units.Add(new UnitInput() { Id = 1, Damage = 1, Energy = 100, Health = 2, Speed = 1, Initiative = 1, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
 
             var units = new List<Unit>();
             input.Units.ForEach(u => units.Add(_unitMapper.MapToUnit(u)));
-            _simulationLogic.Simulate(input.PlayerId, units);
+            return _simulationLogic.Simulate(input.PlayerId, units);
         }
     }
 }
