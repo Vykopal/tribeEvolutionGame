@@ -11,11 +11,6 @@ namespace TrevoTests
 
         }
 
-        [Fact]
-        public void SimpleTests()
-        {
-            var sLogic = new SimulationLogic();
-            Assert.True(true);
-        }
+        
     }
 }

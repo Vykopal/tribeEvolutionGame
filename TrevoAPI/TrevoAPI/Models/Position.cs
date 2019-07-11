@@ -9,41 +9,34 @@ namespace TrevoAPI.Models
     {
         uint maxX;
         uint maxY;
-        uint x;
-        uint y;
 
-        public uint X
-        {
-            get { return x; }
-        }
-        public uint Y
-        {
-            get { return y; }
-            set { if (value + y > maxY) { y = maxY; } else { y = value; } }
-        }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
-        public Position(uint maxX, uint maxY)
+        public Position(uint maxX, uint maxY, int x, int y)
         {
             this.maxX = maxX;
             this.maxY = maxY;
+            X = x;
+            Y = y;
         }
 
         public bool IsMaxX()
         {
-            return maxX == x;
+            return maxX == X;
         }
 
         public bool IsMaxY()
         {
-            return maxY == y;
+            return maxY == Y;
         }
 
         public bool UpIfPossible()
         {
-            var increasedY = y + 1;
-            if (increasedY > maxY)
+            var increasedY = Y + 1;
+            if (increasedY <= maxY)
             {
-                y = increasedY;
+                Y = increasedY;
                 return true;
             }
             return false;
@@ -51,10 +44,10 @@ namespace TrevoAPI.Models
 
         public bool DownIfPossible()
         {
-            var decreasedY = y - 1;
+            var decreasedY = Y - 1;
             if (decreasedY >= 0)
             {
-                y = decreasedY;
+                Y = decreasedY;
                 return true;
             }
             return false;
@@ -62,10 +55,10 @@ namespace TrevoAPI.Models
 
         public bool RightIfPossible()
         {
-            var decreasedX = x + 1;
-            if (decreasedX < maxX)
+            var increasedX = X + 1;
+            if (increasedX <= maxX)
             {
-                y = decreasedX;
+                X = increasedX;
                 return true;
             }
             return false;
@@ -73,10 +66,10 @@ namespace TrevoAPI.Models
 
         public bool LeftIfPossible()
         {
-            var decreasedX = x - 1;
+            var decreasedX = X - 1;
             if (decreasedX >= 0)
             {
-                x = decreasedX;
+                X = decreasedX;
                 return true;
             }
             return false;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TrevoAPI.Logic.Strategy;
+using TrevoAPI.Logic.IStrategy;
 
 namespace TrevoAPI.Models
 {
@@ -14,6 +14,6 @@ namespace TrevoAPI.Models
         public uint Health { get; set; }
         public uint Damage { get; set; }
         public Position Position { get; set; }
-        public Strategy Strategy { get; set; }        
+        public IStrategy Strategy { get; set; }        
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TrevoAPI.Logic.Strategy;
+using TrevoAPI.Logic.IStrategy;
 using TrevoAPI.Models;
 using TrevoAPI.Models.Input;
 
