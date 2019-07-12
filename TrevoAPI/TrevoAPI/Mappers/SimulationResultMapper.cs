@@ -9,14 +9,28 @@ namespace TrevoAPI.Mappers
 {
     public class SimulationResultMapper
     {
-        public SimulationResult MapToSimulationResult(List<Unit> input)
+        public SimulationResult MapToSimulationResult(List<Unit> units, uint playerId, uint numberOfIterations, Map map)
         {
-            var output = new SimulationResult();
-            foreach (var unit in input)
+            var result = new SimulationResult();
+            result.PlayerId = playerId;
+            result.Map = map;
+            for (int ind = 0; ind < numberOfIterations; ind++)
             {
-                output.unitMovements.Add(new UnitMovement { Id = unit.Id, PositionLogs = unit.PositionsLog });
+                var iteration = result.UnitMovements.FirstOrDefault(um => um.Iteration == ind);
+                if (iteration == null)
+                {
+                    iteration = new UnitMovement() { Iteration = (uint)ind };
+                    result.UnitMovements.Add(iteration);
+                }
+                foreach (var unit in units)
+                {
+                    foreach (var positionLog in unit.PositionsLog.Where(p => p.Iteration == ind))
+                    {
+                        iteration.UnitLogs.Add(new UnitLog(unit.Id, positionLog.X, positionLog.Y, positionLog.Index));
+                    }
+                }
             }
-            return output;
+            return result;
         }
     }
 }

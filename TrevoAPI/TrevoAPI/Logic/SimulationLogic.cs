@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using TrevoAPI.Logic.Strategy;
@@ -13,10 +14,6 @@ namespace TrevoAPI.Logic
     public class SimulationLogic : ISimulationLogic
     {
         private SimulationResultMapper _simulationResultMapper;
-        private const uint MaxX = 100;
-        private const uint MaxY = 100;
-        private const int initialX = 50;
-        private const int initialY = 50;
 
         public SimulationLogic(SimulationResultMapper simulationResultMapper)
         {
@@ -25,15 +22,41 @@ namespace TrevoAPI.Logic
 
         public SimulationResult Simulate(uint playerId, List<Unit> units)
         {
-            Setup(units);
-
-            Start(units);
-            return _simulationResultMapper.MapToSimulationResult(units);
+            ValidateInput(units, playerId);
+            var map = SetupMap(units, playerId);
+            var iterations = Start(units);
+            return _simulationResultMapper.MapToSimulationResult(units, playerId, iterations, map);
         }
 
-        private void Start(List<Unit> units)
+        private void ValidateInput(List<Unit> units, uint playerId)
         {
-            var unitsOrdered = units.OrderBy(u => u.Initiative);
+            if (playerId >= 0)
+            {
+                //fetch playerId from DB
+                //fetch units and check availability for player and max values      
+                return;
+            }
+            throw new ValidationException("Failed to validate simulation input");
+        }
+
+        private Map SetupMap(List<Unit> units, uint playerId)
+        {
+            var map = new Map();
+            // based on player setup
+            map.MaxX = 10;
+            map.MaxY = 10;
+            map.InitialX = 5;
+            map.InitialY = 2;
+            foreach (var unit in units)
+            {
+                unit.Position = new Position(map.MaxX, map.MaxY, map.InitialX, map.InitialY);
+            }
+            return map;
+        }
+
+        private uint Start(List<Unit> units)
+        {
+            var unitsOrdered = units.OrderByDescending(u => u.Initiative);
             uint iteration = 0;
             while (unitsOrdered.Any(u => u.Energy > 0))
             {
@@ -44,20 +67,13 @@ namespace TrevoAPI.Logic
                         if (unit.Energy > 0 && unit.Strategy.TryMove(unit.Position))
                         {
                             unit.Energy--;
+                            unit.PositionsLog.Add(new PositionLog(iteration, unit.Position.X, unit.Position.Y, i));
                         }
                     }
-                    unit.PositionsLog.Add(new PositionLog(iteration, unit.Position.X, unit.Position.Y));
                 }
                 iteration++;
             }
-        }
-
-        private void Setup(List<Unit> units)
-        {
-            foreach (var unit in units)
-            {
-                unit.Position = new Position(MaxX, MaxY, initialX, initialY);
-            }
+            return iteration;
         }
     }
 }

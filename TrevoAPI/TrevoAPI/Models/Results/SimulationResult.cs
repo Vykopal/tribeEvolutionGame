@@ -7,6 +7,8 @@ namespace TrevoAPI.Models.Results
 {
     public class SimulationResult
     {
-        public List<UnitMovement> unitMovements { get; set; } = new List<UnitMovement>();
+        public uint PlayerId { get; set; }
+        public Map Map { get; set; }
+        public List<UnitMovement> UnitMovements { get; set; } = new List<UnitMovement>();
     }
 }

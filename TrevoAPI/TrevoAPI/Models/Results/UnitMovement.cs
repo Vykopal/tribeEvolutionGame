@@ -7,7 +7,7 @@ namespace TrevoAPI.Models.Results
 {
     public class UnitMovement
     {
-        public uint Id { get; set; }
-        public List<PositionLog> PositionLogs { get; set; }
+        public uint Iteration { get; set; }
+        public List<UnitLog> UnitLogs { get; set; } = new List<UnitLog>();
     }
 }
