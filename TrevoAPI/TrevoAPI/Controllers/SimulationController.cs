@@ -31,7 +31,7 @@ namespace TrevoAPI.Controllers
             input.Units.Add(new UnitInput() { Id = 0, Damage = 2, Energy = 20, Health = 4, Speed = 2, Initiative = 2, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
             input.Units.Add(new UnitInput() { Id = 1, Damage = 1, Energy = 10, Health = 2, Speed = 1, Initiative = 10, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
             input.Units.Add(new UnitInput() { Id = 2, Damage = 1, Energy = 20, Health = 2, Speed = 10, Initiative = 1, MOVEMENT_STRATEGY = MovementStrategy.RANDOM });
-
+            
             var units = new List<Unit>();
             input.Units.ForEach(u => units.Add(_unitMapper.MapToUnit(u)));
             return _simulationLogic.Simulate(input.PlayerId, units);
