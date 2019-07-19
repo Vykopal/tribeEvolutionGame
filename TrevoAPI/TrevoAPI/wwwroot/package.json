@@ -1,0 +1,24 @@
+{
+  "name": "trevo",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Jan Vykopal",
+  "license": "ISC",
+  "dependencies": {
+    "flummox": "^3.6.9",
+    "lodash": "^4.17.14",
+    "phaser": "^3.18.1"
+  },
+  "devDependencies": {
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  }
+}

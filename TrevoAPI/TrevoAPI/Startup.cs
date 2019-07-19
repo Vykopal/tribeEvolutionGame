@@ -45,6 +45,7 @@ namespace TrevoAPI
             }
 
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }

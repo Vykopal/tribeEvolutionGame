@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TrevoAPI.Controllers
 {
+    [Route("/")]
     public class DefaultController : Controller
     {
         public IActionResult Index()
