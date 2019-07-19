@@ -6,28 +6,28 @@ export namespace FluxFramework {
 
         protected static instance: FluxApp;
 
-        protected constructor() {      
+        protected constructor() {
             this.stores = new Map<string, Store>();
             this.actionSets = new Map<string, ActionSet>();
         }
 
-        public addStore(store: Store) {
+        public addStore = (store: Store) => {
             this.stores.set(store.getId(), store);
         }
 
-        public getStore(key: string): Store {
+        public getStore = (key: string): Store => {
             return this.stores.get(key);
         }
 
-        public addActionSet(actionSet: ActionSet) {
+        public addActionSet = (actionSet: ActionSet) => {
             this.actionSets.set(actionSet.getId(), actionSet);
         }
 
-        public getActionSet(key: string): ActionSet {
+        public getActionSet = (key: string): ActionSet => {
             return this.actionSets.get(key);
         }
 
-        public run(storeId: string, actionId: string, payload: any) {
+        public run = (storeId: string, actionId: string, payload: any) => {
             let store = this.stores.get(storeId);
             if (store) {
                 store.do(actionId, payload);
@@ -50,15 +50,15 @@ export namespace FluxFramework {
             this.handlersSet = new Map();
         }
 
-        public getId(): string {
+        public getId = (): string => {
             return this.id;
         }
 
-        public addHandler(actionKey: string, handler: (actionResult: any) => void) {
+        public addHandler = (actionKey: string, handler: (actionResult: any) => void) => {
             this.handlersSet.set(actionKey, handler);
         }
 
-        public do(actionKey: string, payload: any) {
+        public do = (actionKey: string, payload: any) => {
             let action = this.actionSet.getAction(actionKey);
             if (action) {
                 let handler = this.handlersSet.get(actionKey);
@@ -75,28 +75,28 @@ export namespace FluxFramework {
             }
         }
 
-        public notifyAll(actionName: string) {
+        public notifyAll = (actionName: string) => {
             for (let listener of this.listeners) {
                 listener(actionName);
             }
         }
 
-        public getState(): object {
+        public getState = (): object => {
             return JSON.parse(JSON.stringify(this.state));
         }
 
-        public subscribe(listener: (actionName: string) => void): number {
+        public subscribe = (listener: (actionName: string) => void): number => {
             this.listeners.push(listener);
             return this.listeners.length;
         }
 
-        public unSubscribe(listenerId: number) {
+        public unSubscribe = (listenerId: number) => {
             this.listeners.splice(listenerId, 1);
         }
     }
 
     export class ActionSet {
-        protected actions: Map<string, (payload: object) => object>;
+        protected actions: Map<string, (payload: object) => void>;
         protected id: string;
 
         constructor(id: string) {
@@ -104,15 +104,15 @@ export namespace FluxFramework {
             this.actions = new Map();
         }
 
-        public getId(): string {
+        public getId = (): string => {
             return this.id;
         }
 
-        public addAction(key: string, action: (payload: object) => object) {
+        public addAction = (key: string, action: (payload: object) => void) => {
             this.actions.set(key, action);
         }
 
-        public getAction(key: string): (payload: object) => object {
+        public getAction = (key: string): (payload: object) => void => {
             return this.actions.get(key);
         }
     }

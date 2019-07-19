@@ -1,25 +1,23 @@
-﻿import { SimulationStore, SimulationActions, TrevoFlux } from "./framework/fluxImplementation";
+﻿import { TrevoFlux, STORES, ACTIONS } from "./flux/flux";
 
 (function myTest() {
-    console.log("test started");
-
     let flux = TrevoFlux.getInstance();
 
-    var id = "SIMULATION";
+    var id = STORES.SIMULATION;
     var simStore = flux.getStore(id);
-    simStore.subscribe(function (action) {
+    simStore.subscribe(function (action: string) {
         console.log(action + " happened at store " + id);
-        console.log("New state: " + simStore.getState());
+        console.log("New state:", JSON.stringify(simStore.getState()));
     });
-    flux.run(id, "START_SIMULATION", { PlayerId: 1 });
-    flux.run(id, "START_SIMULATION", { PlayerId: 2 });
-    flux.run(id, "START_SIMULATION", { PlayerId: 3 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 1 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 2 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 3 });
 
     window.setTimeout(function () {
-        flux.run(id, "START_SIMULATION", { PlayerId: 4 });
+        flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 4 });
     }, 1000);
 
     window.setTimeout(function () {
-        flux.run(id, "START_SIMULATION", { PlayerId: 5 });
+        flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 5 });
     }, 500);
 })();
