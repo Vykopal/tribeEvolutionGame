@@ -1,21 +1,21 @@
 export namespace FluxFramework {
 
     export class FluxApp {
-        protected stores: Map<string, Store>;
+        protected stores: Map<string, Store<BaseState>>;
         protected actionSets: Map<string, ActionSet>;
 
         protected static instance: FluxApp;
 
         protected constructor() {
-            this.stores = new Map<string, Store>();
+            this.stores = new Map<string, Store<BaseState>>();
             this.actionSets = new Map<string, ActionSet>();
         }
 
-        public addStore = (store: Store) => {
+        public addStore = (store: Store<BaseState>) => {
             this.stores.set(store.getId(), store);
         }
 
-        public getStore = (key: string): Store => {
+        public getStore = (key: string): Store<BaseState> => {
             return this.stores.get(key);
         }
 
@@ -35,14 +35,14 @@ export namespace FluxFramework {
         }
     }
 
-    export class Store {
+    export class Store<T extends BaseState> {
         protected id: string;
-        protected state: any;
+        protected state: T;
         protected actionSet: ActionSet;
         protected listeners: ((actionName: string) => void)[];
         protected handlersSet: Map<string, (actionResult: any) => void>;
 
-        constructor(id: string, defaultState: any, actions: ActionSet) {
+        constructor(id: string, defaultState: T, actions: ActionSet) {
             this.id = id;
             this.state = defaultState;
             this.actionSet = actions;
@@ -81,8 +81,8 @@ export namespace FluxFramework {
             }
         }
 
-        public getState = (): object => {
-            return JSON.parse(JSON.stringify(this.state));
+        public getState = (): T => {
+            return JSON.parse(JSON.stringify(this.state)) as T;
         }
 
         public subscribe = (listener: (actionName: string) => void): number => {
@@ -93,6 +93,10 @@ export namespace FluxFramework {
         public unSubscribe = (listenerId: number) => {
             this.listeners.splice(listenerId, 1);
         }
+    }
+
+    export class BaseState {
+
     }
 
     export class ActionSet {

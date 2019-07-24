@@ -1,21 +1,23 @@
-import { TrevoFlux } from "./framework/fluxImplementation";
+import { TrevoFlux } from "./flux/flux";
+import { ACTIONS, STORES } from "./flux/constants";
+import { GameInitiator } from "./game/game";
 (function myTest() {
-    console.log("test started");
     let flux = TrevoFlux.getInstance();
-    var id = "SIMULATION";
+    var id = STORES.SIMULATION;
     var simStore = flux.getStore(id);
     simStore.subscribe(function (action) {
         console.log(action + " happened at store " + id);
-        console.log("New state: " + simStore.getState());
+        console.log("New state:", JSON.stringify(simStore.getState()));
     });
-    flux.run(id, "START_SIMULATION", { PlayerId: 1 });
-    flux.run(id, "START_SIMULATION", { PlayerId: 2 });
-    flux.run(id, "START_SIMULATION", { PlayerId: 3 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 1 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 2 });
+    flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 3 });
     window.setTimeout(function () {
-        flux.run(id, "START_SIMULATION", { PlayerId: 4 });
+        flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 4 });
     }, 1000);
     window.setTimeout(function () {
-        flux.run(id, "START_SIMULATION", { PlayerId: 5 });
+        flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 5 });
     }, 500);
+    let gameInitiator = new GameInitiator();
 })();
 //# sourceMappingURL=index.js.map

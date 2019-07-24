@@ -1,0 +1,1 @@
+{"version":3,"file":"constants.js","sourceRoot":"","sources":["../../../src/flux/constants.ts"],"names":[],"mappings":"AAAA,MAAM,KAAW,MAAM,CAEtB;AAFD,WAAiB,MAAM;IACN,iBAAU,GAAW,YAAY,CAAC;AACnD,CAAC,EAFgB,MAAM,KAAN,MAAM,QAEtB;AAED,MAAM,KAAW,OAAO,CAEvB;AAFD,WAAiB,OAAO;IACP,wBAAgB,GAAW,kBAAkB,CAAC;AAC/D,CAAC,EAFgB,OAAO,KAAP,OAAO,QAEvB"}

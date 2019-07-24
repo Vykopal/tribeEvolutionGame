@@ -9,7 +9,15 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
-            }
+            }//,
+            //{
+            //    test: /\.less$/, // .less and .css
+            //    use: [
+            //        'style-loader',
+            //        'css-loader',
+            //        'less-loader'
+            //    ]
+            //}
         ]
     },
     resolve: {

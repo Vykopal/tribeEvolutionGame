@@ -6,8 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\NewFolder\" />
-    <Folder Include="wwwroot\src\game\" />
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\src\actions\SimulationActions.ts" />
+    <Content Remove="wwwroot\src\flux\constants.ts" />
+    <Content Remove="wwwroot\src\stores\SimulationStore.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +19,20 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\src\actions\SimulationActions.ts" />
+    <TypeScriptCompile Include="wwwroot\src\flux\constants.ts" />
+    <TypeScriptCompile Include="wwwroot\src\stores\SimulationStore.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\definitions\phaser\" />
   </ItemGroup>
 
 </Project>

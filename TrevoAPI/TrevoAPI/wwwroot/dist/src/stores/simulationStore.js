@@ -1,18 +1,20 @@
-import { Store } from 'flummox';
-export default class SimulationStore extends Store {
-    constructor(flux) {
-        super(); // Don't forget this step
-        const simulationActionIds = flux.getActionIds('simulation');
-        this.register(simulationActionIds.startSimulation, this.handleStartSimulation);
-        this.state = {
-            simulationResult: {}
+import { ACTIONS } from "../flux/constants";
+import { FluxFramework } from "../framework/framework";
+export class SimulationStore extends FluxFramework.Store {
+    constructor(defaultState, actions) {
+        super(actions.getId(), defaultState, actions);
+        this.startSimulationHandler = (actionResult) => {
+            //update state accordingly
+            if (this.isValidState(actionResult)) {
+                this.state = actionResult;
+            }
         };
-    }
-    handleStartSimulation(simulationData) {
-        debugger;
-        this.setState({
-            simulationResult: simulationData
-        });
+        this.isValidState = (state) => {
+            return !!state;
+        };
+        this.addHandler(ACTIONS.START_SIMULATION, this.startSimulationHandler);
     }
 }
-//# sourceMappingURL=simulationStore.js.map
+export class SimulationState {
+}
+//# sourceMappingURL=SimulationStore.js.map

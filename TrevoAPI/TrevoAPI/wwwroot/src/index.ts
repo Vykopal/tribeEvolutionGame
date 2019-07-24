@@ -1,4 +1,6 @@
-﻿import { TrevoFlux, STORES, ACTIONS } from "./flux/flux";
+﻿import { TrevoFlux } from "./flux/flux";
+import { ACTIONS, STORES } from "./flux/constants";
+import { GameInitiator } from "./game/game"
 
 (function myTest() {
     let flux = TrevoFlux.getInstance();
@@ -20,4 +22,7 @@
     window.setTimeout(function () {
         flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 5 });
     }, 500);
+
+    let gameInitiator = new GameInitiator();
+    
 })();

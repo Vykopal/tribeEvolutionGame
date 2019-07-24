@@ -1,31 +1,23 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-import { Actions } from 'flummox';
-export default class SimulationActions extends Actions {
-    startSimulation(simulationSetup) {
-        return __awaiter(this, void 0, void 0, function* () {
+import { ACTIONS } from "../flux/constants";
+import { FluxFramework } from "../framework/framework";
+export class SimulationActions extends FluxFramework.ActionSet {
+    constructor(id) {
+        super(id);
+        this.startSimulationAction = (payload) => {
             fetch("api/simulation", {
                 method: 'post',
-                body: JSON.stringify(simulationSetup),
+                body: JSON.stringify(payload),
                 headers: { 'Content-Type': 'application/json' }
             })
                 .then(response => {
                 return {
-                    content: "response"
+                    simulationResult: response
                 };
             }).catch(error => {
-                console.error(error);
-                return {
-                    content: null
-                };
+                throw new Error("Failed to fetch simulation result.");
             });
-        });
+        };
+        this.addAction(ACTIONS.START_SIMULATION, this.startSimulationAction);
     }
 }
 //# sourceMappingURL=SimulationActions.js.map
