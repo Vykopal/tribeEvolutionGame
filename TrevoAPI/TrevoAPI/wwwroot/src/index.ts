@@ -23,6 +23,11 @@ import { GameInitiator } from "./game/game"
         flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 5 });
     }, 500);
 
+    window.setTimeout(function () {
+        flux.run(id, ACTIONS.START_SIMULATION, { PlayerId: 6 });
+    }, 700);
+
+
     let gameInitiator = new GameInitiator();
     
 })();

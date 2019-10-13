@@ -17,5 +17,7 @@ namespace TrevoAPI.Models
         public Position Position { get; set; }
         public IStrategy Strategy { get; set; }
         public List<PositionLog> PositionsLog { get; set; } = new List<PositionLog>();
+        public uint CarryCapacity { get; internal set; }
+        public uint Vision { get; internal set; }
     }
 }

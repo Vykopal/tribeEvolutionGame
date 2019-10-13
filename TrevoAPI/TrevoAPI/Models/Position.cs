@@ -13,7 +13,7 @@ namespace TrevoAPI.Models
         public int X { get; private set; }
         public int Y { get; private set; }
 
-        public Position(uint maxX, uint maxY, int x, int y)
+        public Position(int x, int y)
         {
             this.maxX = maxX;
             this.maxY = maxY;

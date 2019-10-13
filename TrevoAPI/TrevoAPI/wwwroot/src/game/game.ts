@@ -37,21 +37,21 @@ export class GameInitiator {
     constructor() {
         this.game = new Game(config);
 
-        window.setTimeout(() => {
-            this.game.scene.start(SceneKeys.GAME_LOBBY_SCENE);
-        }, 500);
-        window.setTimeout(() => {
-            this.game.scene.start(SceneKeys.NEXT_ROUND_SCENE);
-        }, 500);
-        window.setTimeout(() => {
-            this.game.scene.start(SceneKeys.ROUND_SUMMARY_SCENE);
-        }, 500);
-        window.setTimeout(() => {
-            this.game.scene.start(SceneKeys.UNITS_SCENE);
-        }, 500);
-        window.setTimeout(() => {
-            this.game.scene.start(SceneKeys.WELCOME_SCENE);
-        }, 500);
+        //window.setTimeout(() => {
+        //    this.game.scene.start(SceneKeys.GAME_LOBBY_SCENE);
+        //}, 500);
+        //window.setTimeout(() => {
+        //    this.game.scene.start(SceneKeys.NEXT_ROUND_SCENE);
+        //}, 500);
+        //window.setTimeout(() => {
+        //    this.game.scene.start(SceneKeys.ROUND_SUMMARY_SCENE);
+        //}, 500);
+        //window.setTimeout(() => {
+        //    this.game.scene.start(SceneKeys.UNITS_SCENE);
+        //}, 500);
+        //window.setTimeout(() => {
+        //    this.game.scene.start(SceneKeys.WELCOME_SCENE);
+        //}, 500);
     }
 }
 

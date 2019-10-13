@@ -1,8 +1,9 @@
 import "phaser";
+import { SceneKeys } from "../game";
 export class GameLobbyScene extends Phaser.Scene {
     constructor() {
         super({
-            key: "GameLobbyScene"
+            key: SceneKeys.GAME_LOBBY_SCENE
         });
     }
     preload() {

@@ -1,8 +1,9 @@
 import "phaser";
+import { SceneKeys } from "../game";
 export class RoundSummaryScene extends Phaser.Scene {
     constructor() {
         super({
-            key: "RoundSummaryScene"
+            key: SceneKeys.ROUND_SUMMARY_SCENE
         });
     }
     preload() {

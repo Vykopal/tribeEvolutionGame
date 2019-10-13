@@ -1,5 +1,9 @@
 import "phaser";
 import { WelcomeScene } from "./scenes/welcomeScene";
+import { NextRoundScene } from "./scenes/nextRoundScene";
+import { GameLobbyScene } from "./scenes/gameLobbyScene";
+import { RoundSummaryScene } from "./scenes/roundSummaryScene";
+import { UnitsScene } from "./scenes/unitsScene";
 // main game configuration
 const config = {
     width: window.innerWidth,
@@ -11,7 +15,7 @@ const config = {
             gravity: { y: 200 }
         }
     },
-    scene: WelcomeScene,
+    scene: [WelcomeScene, GameLobbyScene, NextRoundScene, RoundSummaryScene, UnitsScene],
     scale: {
         mode: Phaser.Scale.CENTER_BOTH,
         autoCenter: Phaser.Scale.CENTER_BOTH,
