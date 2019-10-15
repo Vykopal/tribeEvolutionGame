@@ -49,7 +49,7 @@ namespace TrevoAPI.Logic
             map.InitialY = 2;
             foreach (var unit in units)
             {
-                unit.Position = new Position(map.MaxX, map.MaxY, map.InitialX, map.InitialY);
+                //unit.Position = new Position(map.MaxX, map.MaxY, map.InitialX, map.InitialY);
             }
             return map;
         }
