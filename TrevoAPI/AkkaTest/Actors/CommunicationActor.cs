@@ -1,5 +1,7 @@
 ﻿using System;
 using Akka.Actor;
+using AkkaTest.Payloads;
+using static AkkaTest.Payloads.CommunicationPayloads;
 
 namespace AkkaTest.Actors
 {
@@ -8,27 +10,33 @@ namespace AkkaTest.Actors
     /// </summary>
     public class CommunicationActor : BaseActor
     {
-        public CommunicationActor()
+        public CommunicationActor() : base()
         {
-            MessageSwitch.Add(typeof(MessagePayload), (a) => SendMessage((MessagePayload)a));
+            Receive<SendInfoToPlayerPayload>(m => SendInfoToPlayer(m));
+            Receive<ActOnPlayersActionPayload>(m => ActOnPlayersAction(m));
+            Receive<ConnectPlayerPayload>(m => ConnectPlayer(m));
+            Receive<DisconnectPlayerPayload>(m => DisconnectPlayer(m));
+
         }
 
-        protected override void OnReceive(object message)
+        private void DisconnectPlayer(DisconnectPlayerPayload m)
         {
-            Log.Info("message received in Communication actor");
-            if (message == null) throw new ArgumentException();
-            MessageSwitch[message.GetType()]?.Invoke(message as BasePayload);
+            throw new NotImplementedException();
         }
 
-        private void SendMessage(MessagePayload message)
+        private void ConnectPlayer(ConnectPlayerPayload m)
         {
-            Log.Info($"Message sent to user: {message.Message}");
+            throw new NotImplementedException();
         }
 
-        public struct MessagePayload : BasePayload
+        private void ActOnPlayersAction(ActOnPlayersActionPayload m)
         {
-            public Guid RefId { get; set; }
-            public string Message { get; set; }
+            throw new NotImplementedException();
+        }
+
+        private void SendInfoToPlayer(SendInfoToPlayerPayload m)
+        {
+            throw new NotImplementedException();
         }
     }
 }
